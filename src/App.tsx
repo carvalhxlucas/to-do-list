@@ -6,6 +6,7 @@ import PlusIcon from './assets/icons/plus.svg?react';
 import PencilIcon from './assets/icons/pencil.svg?react';
 import XIcon from './assets/icons/x.svg?react';
 import Icon from './components/icon';
+import Badge from './components/badge';
 
 export default function App() {
   return (
@@ -23,6 +24,16 @@ export default function App() {
         <Icon svg={PlusIcon} />
         <Icon svg={PencilIcon} />
         <Icon svg={XIcon} />
+      </div>
+
+      <div className="flex gap-4">
+        <Badge variant="primary" size="sm">
+          <Text variant="body-sm-bold"> 10 </Text>
+        </Badge>
+
+        <Badge variant="secondary" size="sm">
+          <Text variant="body-sm-bold"> 10 </Text>
+        </Badge>
       </div>
     </div>
   )
