@@ -1,5 +1,6 @@
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva, cx, type VariantProps } from "class-variance-authority";
 import Icon from "./icon";
+import Skeleton from "./skeleton";
 
 export const buttonIconVariants = cva(
     `
@@ -31,7 +32,19 @@ interface ButtonIconProps
     extends Omit<React.ComponentProps<"button">, "disabled" | "size">,
     VariantProps<typeof buttonIconVariants> {
     icon: React.ComponentProps<typeof Icon>["svg"];
+    loading?: boolean;
 }
+
+export const buttonIconSkeletonVariants = cva("", {
+    variants: {
+        size: {
+            sm: "w-6 h-6",
+        },
+    },
+    defaultVariants: {
+        size: "sm",
+    },
+});
 
 export const buttonIconIconVariants = cva("transition", {
     variants: {
@@ -56,8 +69,18 @@ export default function ButtonIcon({
     disabled,
     className,
     icon,
+    loading,
     ...props
 }: ButtonIconProps) {
+    if (loading) {
+        return (
+            <Skeleton
+                rounded="lg"
+                className={cx(buttonIconSkeletonVariants({ size }), className)}
+            />
+        );
+    }
+
     return (
         <button
             className={buttonIconVariants({ className, variant, size, disabled })}
